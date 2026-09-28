@@ -1,0 +1,187 @@
+# <h1 align="center">Laporan Praktikum Modul 1 - Codeblocks IDE & Pengenalan Bahas C++ (Bagian Pertama)</h1>
+<p align="center">Muhammad Azhar nur Hafizh - 109082500049</p>
+
+## Dasar Teori
+Bahasa C++ diciptakan oleh Bjarne Stroustrup di AT&T Bell Laboratories pada awal tahun 1980-an. Bahasa ini berawal dari bahasa C yang ditambahi fasilitas kelas, sehingga pada mulanya disebut "C with class", lalu disempurnakan dengan penambahan pembebanlebihan operator dan fungsi hingga menjadi C++ [3]. Pada praktikum ini, C++ dipakai sebagai bahasa untuk mempelajari dasar-dasar pemrograman sebelum masuk ke materi struktur data.
+
+### A. Struktur Program dan Identifier<br/>
+Secara umum, program C++ tersusun dari beberapa bagian, yaitu pemanggilan *library* (`#include`), pendefinisian konstanta, pendefinisian tipe data bentukan, deklarasi variabel, deklarasi fungsi/prosedur, dan program utama `main()` [3]. Setiap pernyataan (*statement*) dalam C++ diakhiri dengan tanda titik koma (;).
+#### 1. Library
+Fungsi `cout` dan `cin` berada di *header file* `<iostream>`, sehingga harus dipanggil dengan `#include <iostream>` agar bisa dipakai [3].
+#### 2. Identifier
+*Identifier* adalah nama yang dipakai untuk variabel, konstanta, fungsi, atau objek lain. Aturannya: harus diawali huruf atau garis bawah (_), tidak boleh mengandung spasi, tidak boleh memakai operator aritmatika, dan bersifat *case sensitive* sehingga `panjang` berbeda dengan `Panjang` [3].
+#### 3. Fungsi main()
+`main()` adalah fungsi utama tempat program mulai dijalankan. Blok program ditulis di dalam kurung kurawal `{ }` dan biasanya diakhiri dengan `return 0;` [3].
+
+### B. Tipe Data, Variabel, dan Konstanta<br/>
+Data dapat dinyatakan dalam bentuk variabel atau konstanta. Tipe data dasar yang dibahas pada modul adalah `char`, `int`, `long`, `float`, dan `double` [3].
+#### 1. Tipe Data Dasar
+`int` dipakai untuk bilangan bulat, `float` dan `double` untuk bilangan pecahan (real) dengan presisi tunggal dan ganda, sedangkan `char` untuk karakter [3].
+#### 2. Variabel
+Variabel dipakai untuk menyimpan nilai yang bisa berubah selama program berjalan. Bentuk deklarasinya adalah `tipe_data nama_variabel;` dan variabel juga bisa langsung diberi nilai awal, misalnya `int x = 20;` [3].
+#### 3. Konstanta
+Konstanta menyimpan nilai yang selalu tetap. Untuk mendeklarasikannya cukup menambahkan kata `const` di depan tipe data, misalnya `const float phi = 3.14;` [3].
+
+### C. Input dan Output<br/>
+Operasi masukan dan keluaran pada C++ memakai `cin` dan `cout` dari *library* `iostream` [3].
+#### 1. Output dengan cout
+`cout` digunakan untuk mencetak data, baik teks maupun angka, dengan operator `<<`. Perintah `endl` atau `\n` dipakai untuk pindah ke baris baru [3].
+#### 2. Input dengan cin
+`cin` digunakan untuk membaca masukan dari *keyboard* dengan operator `>>`, dan nilainya langsung disimpan ke variabel yang dituju tanpa perlu penentu format seperti pada `printf()` [3].
+#### 3. Escape Sequence
+*Escape sequence* adalah karakter khusus yang diawali tanda `\`, contohnya `\n` untuk baris baru dan `\t` untuk tabulasi [3].
+
+### D. Operator<br/>
+Operator adalah simbol yang dipakai untuk melakukan suatu operasi atau manipulasi [3].
+#### 1. Operator Aritmatika
+Terdiri dari penjumlahan (+), pengurangan (-), perkalian (*), pembagian (/), dan sisa bagi (%). Untuk mengubah urutan pengerjaan dapat dipakai tanda kurung [3]. Pada pembagian dua bilangan bulat, hasilnya juga bilangan bulat sehingga bagian desimalnya dibuang.
+#### 2. Operator Relasi dan Logika
+Operator relasi (`==`, `!=`, `<`, `<=`, `>`, `>=`) dipakai untuk membandingkan dua nilai, sedangkan operator logika (`&&`, `||`, `!`) dipakai untuk menggabungkan atau membalik kondisi [3].
+#### 3. Operator Increment dan Decrement
+Operator `++` menambah nilai variabel sebanyak 1, sedangkan `--` menguranginya sebanyak 1 [3].
+
+### E. Kondisional dan Perulangan<br/>
+Untuk mengambil keputusan, C++ menyediakan pernyataan `if`, `if-else`, dan `switch` [3]. Untuk mengulang suatu proses, C++ menyediakan `for`, `while`, dan `do...while`, dan setiap perulangan harus punya kondisi berhenti [3].
+#### 1. if dan if-else
+Pernyataan `if` menjalankan perintah hanya jika kondisinya benar, dan `else` menjalankan perintah lain jika kondisinya salah [3].
+#### 2. switch
+`switch` dirancang khusus untuk pengambilan keputusan dengan banyak alternatif. Setiap `case` biasanya diakhiri `break`, dan `default` dijalankan bila tidak ada `case` yang cocok [3].
+#### 3. for, while, dan do...while
+Perulangan `for` cocok saat jumlah pengulangan sudah diketahui, `while` memeriksa kondisi di awal, sedangkan `do...while` memeriksa kondisi di akhir sehingga pasti berjalan minimal satu kali [3].
+
+## Unguided 
+
+### 1. Buatlah program yang menerima input-an dua buah bilangan betipe float, kemudian memberikan output-an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua bilangan tersebut.
+
+```C++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    float a, b;
+
+    cout << "Masukkan bilangan pertama: ";
+    cin >> a;
+    cout << "Masukkan bilangan kedua: ";
+    cin >> b;
+
+    cout << "\n=== Hasil Operasi ===" << endl;
+    cout << "Penjumlahan : " << a + b << endl;
+    cout << "Pengurangan : " << a - b << endl;
+    cout << "Perkalian   : " << a * b << endl;
+    
+    if (b != 0) {
+        cout << "Pembagian   : " << a / b << endl;
+    } else {
+        cout << "Pembagian   : Tidak dapat dibagi dengan nol!" << endl;
+    }
+
+    return 0;
+}
+```
+### Output Unguided 1 :
+
+![Screenshot Output Unguided 1_2]()
+
+Program pertama menghitung empat operasi aritmatika dasar (+, -, *, /) dari dua bilangan bertipe float, dengan pengkondisian if untuk memastikan variabel pembagi bukan nol agar program tidak mengalami kesalahan sistem (division by zero)
+
+### 2. Buatlah sebuah program yang menerima masukan angka dan mengeluarkan output nilai angka tersebut dalam bentuk tulisan. Angka yang akan di-input-kan user adalah bilangan bulat positif mulai dari 0 s.d 100. Contoh: 79 : tujuh puluh sembilan
+
+```C++
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string satuan[] = {"", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"};
+
+string terbilang(int n) {
+    if (n < 12) {
+        return satuan[n];
+    } else if (n < 20) {
+        return terbilang(n - 10) + " belas";
+    } else if (n < 100) {
+        return terbilang(n / 10) + " puluh " + terbilang(n % 10);
+    } else if (n == 100) {
+        return "seratus";
+    }
+    return "";
+}
+
+int main() {
+    int angka;
+
+    cout << "Masukkan angka (0-100): ";
+    cin >> angka;
+
+    cout << "Output: ";
+    if (angka == 0) {
+        cout << "nol" << endl;
+    } else if (angka > 0 && angka <= 100) {
+        cout << terbilang(angka) << endl;
+    } else {
+        cout << "Angka di luar jangkauan (0-100)!" << endl;
+    }
+
+    return 0;
+}
+```
+### Output Unguided 2 :
+
+![Screenshot Output Unguided 2_2]()
+
+Program kedua mengonversi angka desimal bulat dari rentang 0 hingga 100 menjadi kata terbilang bahasa Indonesia dengan memanfaatkan operasi matematika pembagian (/) 
+untuk digit puluhan dan sisa bagi (%) untuk digit satuan, lalu mencocokkannya melalui struktur if-else dan switch-case.
+
+### 3. Buatlah program yang dapat memberikan input dan output sbb. (Gambar 1.25 Mirror)
+
+```C++
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+    int n;
+    cout << "input: ";
+    cin >> n;
+
+    cout << "output:" << endl;
+
+    for (int i = n; i >= 1; i--) {
+        // Cetak spasi di awal untuk membentuk pola rata tengah/segitiga
+        cout << string((n - i) * 2, ' ');
+
+        // Angka menurun (misal: 3 2 1)
+        for (int j = i; j >= 1; j--) {
+            cout << j << " ";
+        }
+
+        // Karakter Bintang
+        cout << "* ";
+
+        // Angka naik (misal: 1 2 3)
+        for (int j = 1; j <= i; j++) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+
+    // Baris terakhir (hanya cetak bintang)
+    cout << string(n * 2, ' ') << "*" << endl;
+
+    return 0;
+}
+```
+### Output Unguided 3 :
+
+![Screenshot Output Unguided 3_2]()
+
+Program ketiga membentuk pola angka cermin simetris terbalik menggunakan perulangan bersarang (nested loop) yang mengatur cetakan spasi untuk posisi rata tengah, deret angka menurun, karakter pembatas bintang * di posisi tengah, serta deret angka menaik di sisi kanan.
+
+## Kesimpulan
+Dari praktikum Modul 1 ini, saya belajar cara membuat program sederhana dalam bahasa C++, mulai dari struktur program, penggunaan variabel dengan tipe data yang sesuai, sampai input dan output memakai `cin` dan `cout`. Pada soal pertama, saya memakai tipe `float` dan operator aritmatika untuk menghitung dua bilangan. Pada soal kedua, saya memakai `if-else`, `switch`, serta operator `/` dan `%` untuk mengubah angka menjadi tulisan. Pada soal ketiga, saya memakai perulangan `for` bersarang untuk membentuk pola angka. Dengan latihan ini saya jadi lebih paham bahwa program yang rumit sebenarnya tersusun dari konsep dasar yang dipakai berulang, sehingga dasar-dasar ini penting dikuasai sebelum masuk ke materi struktur data.
+
+## Referensi
+[1] Modul 1 Struktur Data: Code Blocks IDE & Pengenalan Bahasa C++ (Bagian Pertama). Fakultas Informatika, Telkom University.
