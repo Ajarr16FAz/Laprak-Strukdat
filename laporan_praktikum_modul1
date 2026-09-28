@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul 1 - Codeblocks IDE & Pengenalan Bahas C++ (Bagian Pertama)</h1>
-<p align="center">Muhammad Azhar nur Hafizh - 109082500049</p>
+<p align="center">Andhista Novian Firzatullah - 109082500092</p>
 
 ## Dasar Teori
 Bahasa C++ diciptakan oleh Bjarne Stroustrup di AT&T Bell Laboratories pada awal tahun 1980-an. Bahasa ini berawal dari bahasa C yang ditambahi fasilitas kelas, sehingga pada mulanya disebut "C with class", lalu disempurnakan dengan penambahan pembebanlebihan operator dan fungsi hingga menjadi C++ [3]. Pada praktikum ini, C++ dipakai sebagai bahasa untuk mempelajari dasar-dasar pemrograman sebelum masuk ke materi struktur data.
@@ -55,26 +55,31 @@ Perulangan `for` cocok saat jumlah pengulangan sudah diketahui, `while` memeriks
 
 ```C++
 #include <iostream>
-
 using namespace std;
 
 int main() {
-    float a, b;
+    float bil1, bil2;
+    float tambah, kurang, kali, bagi;
 
-    cout << "Masukkan bilangan pertama: ";
-    cin >> a;
-    cout << "Masukkan bilangan kedua: ";
-    cin >> b;
+    cout << "Masukkan bilangan pertama : ";
+    cin >> bil1;
+    cout << "Masukkan bilangan kedua   : ";
+    cin >> bil2;
 
-    cout << "\n=== Hasil Operasi ===" << endl;
-    cout << "Penjumlahan : " << a + b << endl;
-    cout << "Pengurangan : " << a - b << endl;
-    cout << "Perkalian   : " << a * b << endl;
-    
-    if (b != 0) {
-        cout << "Pembagian   : " << a / b << endl;
+    tambah = bil1 + bil2;
+    kurang = bil1 - bil2;
+    kali = bil1 * bil2;
+
+    cout << endl;
+    cout << "Hasil penjumlahan  : " << bil1 << " + " << bil2 << " = " << tambah << endl;
+    cout << "Hasil pengurangan  : " << bil1 << " - " << bil2 << " = " << kurang << endl;
+    cout << "Hasil perkalian    : " << bil1 << " * " << bil2 << " = " << kali << endl;
+
+    if (bil2 != 0) {
+        bagi = bil1 / bil2;
+        cout << "Hasil pembagian    : " << bil1 << " / " << bil2 << " = " << bagi << endl;
     } else {
-        cout << "Pembagian   : Tidak dapat dibagi dengan nol!" << endl;
+        cout << "Hasil pembagian    : tidak bisa dilakukan (pembagi = 0)" << endl;
     }
 
     return 0;
@@ -82,103 +87,148 @@ int main() {
 ```
 ### Output Unguided 1 :
 
-![Screenshot Output Unguided 1_2]()
+![Screenshot Output Unguided 1_2](https://github.com/andistafirza-droid/Laprak-Strukdat/blob/main/Praktikum%20Struktur%20Data/28-09-2026/Screenshot/Output-Unguided-One.png)
 
-Program pertama menghitung empat operasi aritmatika dasar (+, -, *, /) dari dua bilangan bertipe float, dengan pengkondisian if untuk memastikan variabel pembagi bukan nol agar program tidak mengalami kesalahan sistem (division by zero)
+Program ini dibuat untuk menghitung empat operasi dasar dari dua bilangan yang diinputkan user. Pertama, dideklarasikan dua variabel bertipe `float` (`bil1` dan `bil2`) untuk menyimpan bilangan, serta empat variabel `float` lain untuk menyimpan hasil. Bilangan dibaca dengan `cin`, lalu dihitung memakai operator aritmatika `+`, `-`, dan `*`, kemudian hasilnya ditampilkan dengan `cout`.
+
+Untuk pembagian, program mengecek dulu dengan `if` apakah `bil2` tidak sama dengan 0. Kalau tidak nol, pembagian dilakukan seperti biasa. Kalau nol, program menampilkan pesan bahwa pembagian tidak bisa dilakukan, supaya program tidak error. Karena tipe datanya `float`, bilangan pecahan seperti 7.5 dan 2.5 juga bisa dihitung dengan benar.
 
 ### 2. Buatlah sebuah program yang menerima masukan angka dan mengeluarkan output nilai angka tersebut dalam bentuk tulisan. Angka yang akan di-input-kan user adalah bilangan bulat positif mulai dari 0 s.d 100. Contoh: 79 : tujuh puluh sembilan
 
 ```C++
 #include <iostream>
-#include <string>
-
 using namespace std;
 
-string satuan[] = {"", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"};
-
-string terbilang(int n) {
-    if (n < 12) {
-        return satuan[n];
-    } else if (n < 20) {
-        return terbilang(n - 10) + " belas";
-    } else if (n < 100) {
-        return terbilang(n / 10) + " puluh " + terbilang(n % 10);
-    } else if (n == 100) {
-        return "seratus";
-    }
-    return "";
-}
-
 int main() {
-    int angka;
+    int angka, puluhan, satuan;
 
-    cout << "Masukkan angka (0-100): ";
+    cout << "Masukkan angka (0 - 100): ";
     cin >> angka;
 
-    cout << "Output: ";
-    if (angka == 0) {
-        cout << "nol" << endl;
-    } else if (angka > 0 && angka <= 100) {
-        cout << terbilang(angka) << endl;
-    } else {
-        cout << "Angka di luar jangkauan (0-100)!" << endl;
+    if (angka < 0 || angka > 100) {
+        cout << "Angka harus berada di antara 0 sampai 100!" << endl;
+        return 0;
     }
 
+    cout << angka << " : ";
+
+    if (angka == 0) {
+        cout << "nol";
+    } else if (angka == 100) {
+        cout << "seratus";
+    } else if (angka == 10) {
+        cout << "sepuluh";
+    } else if (angka == 11) {
+        cout << "sebelas";
+    } else if (angka > 11 && angka < 20) {
+        // angka belasan (12 sampai 19)
+        satuan = angka % 10;
+        switch (satuan) {
+            case 2: cout << "dua"; break;
+            case 3: cout << "tiga"; break;
+            case 4: cout << "empat"; break;
+            case 5: cout << "lima"; break;
+            case 6: cout << "enam"; break;
+            case 7: cout << "tujuh"; break;
+            case 8: cout << "delapan"; break;
+            case 9: cout << "sembilan"; break;
+        }
+        cout << " belas";
+    } else {
+        // angka 1-9 dan 20-99
+        puluhan = angka / 10;
+        satuan = angka % 10;
+
+        if (puluhan > 0) {
+            switch (puluhan) {
+                case 2: cout << "dua"; break;
+                case 3: cout << "tiga"; break;
+                case 4: cout << "empat"; break;
+                case 5: cout << "lima"; break;
+                case 6: cout << "enam"; break;
+                case 7: cout << "tujuh"; break;
+                case 8: cout << "delapan"; break;
+                case 9: cout << "sembilan"; break;
+            }
+            cout << " puluh";
+        }
+
+        if (satuan > 0) {
+            if (puluhan > 0) {
+                cout << " ";
+            }
+            switch (satuan) {
+                case 1: cout << "satu"; break;
+                case 2: cout << "dua"; break;
+                case 3: cout << "tiga"; break;
+                case 4: cout << "empat"; break;
+                case 5: cout << "lima"; break;
+                case 6: cout << "enam"; break;
+                case 7: cout << "tujuh"; break;
+                case 8: cout << "delapan"; break;
+                case 9: cout << "sembilan"; break;
+            }
+        }
+    }
+
+    cout << endl;
     return 0;
 }
 ```
 ### Output Unguided 2 :
 
-![Screenshot Output Unguided 2_2]()
+![Screenshot Output Unguided 2_2](https://github.com/andistafirza-droid/Laprak-Strukdat/blob/main/Praktikum%20Struktur%20Data/28-09-2026/Screenshot/Output-Unguided-Two.png)
 
-Program kedua mengonversi angka desimal bulat dari rentang 0 hingga 100 menjadi kata terbilang bahasa Indonesia dengan memanfaatkan operasi matematika pembagian (/) 
-untuk digit puluhan dan sisa bagi (%) untuk digit satuan, lalu mencocokkannya melalui struktur if-else dan switch-case.
+Program ini mengubah angka 0 sampai 100 menjadi tulisan bahasa Indonesia. Setelah angka dibaca dengan `cin`, program mengecek dulu apakah angkanya berada di rentang 0 sampai 100. Kalau di luar rentang, program menampilkan pesan peringatan lalu berhenti.
+
+Setelah itu, angka dibagi menjadi beberapa kondisi memakai `if - else if`. Angka yang punya penulisan khusus ditangani sendiri, yaitu 0 (nol), 10 (sepuluh), 11 (sebelas), dan 100 (seratus). Untuk angka 12 sampai 19, program mengambil digit satuannya dengan operator `%`, menuliskan nama angkanya lewat `switch`, lalu menambahkan kata "belas".
+
+Untuk angka selain itu (1 sampai 9 dan 20 sampai 99), angka dipisah menjadi puluhan dengan operator `/` dan satuan dengan operator `%`. Contohnya 79, puluhan = 79 / 10 = 7 dan satuan = 79 % 10 = 9. Puluhan ditulis dengan `switch` diikuti kata "puluh", lalu satuan ditulis dengan `switch` juga, sehingga hasilnya `79 : tujuh puluh sembilan`. Kalau satuannya 0 (misalnya 40), bagian satuan tidak dicetak sehingga hasilnya cukup "empat puluh".
 
 ### 3. Buatlah program yang dapat memberikan input dan output sbb. (Gambar 1.25 Mirror)
 
 ```C++
 #include <iostream>
-#include <iomanip>
-
 using namespace std;
 
 int main() {
     int n;
+
     cout << "input: ";
     cin >> n;
-
     cout << "output:" << endl;
 
-    for (int i = n; i >= 1; i--) {
-        // Cetak spasi di awal untuk membentuk pola rata tengah/segitiga
-        cout << string((n - i) * 2, ' ');
+    for (int i = n; i >= 0; i--) {
+        // spasi di depan supaya bentuknya rata tengah
+        for (int s = 0; s < n - i; s++) {
+            cout << " ";
+        }
 
-        // Angka menurun (misal: 3 2 1)
+        // angka menurun dari i sampai 1
         for (int j = i; j >= 1; j--) {
-            cout << j << " ";
+            cout << j;
         }
 
-        // Karakter Bintang
-        cout << "* ";
+        cout << "*";
 
-        // Angka naik (misal: 1 2 3)
+        // angka menaik dari 1 sampai i
         for (int j = 1; j <= i; j++) {
-            cout << j << " ";
+            cout << j;
         }
+
         cout << endl;
     }
-
-    // Baris terakhir (hanya cetak bintang)
-    cout << string(n * 2, ' ') << "*" << endl;
 
     return 0;
 }
 ```
 ### Output Unguided 3 :
 
-![Screenshot Output Unguided 3_2]()
+![Screenshot Output Unguided 3_2](https://github.com/andistafirza-droid/Laprak-Strukdat/blob/main/Praktikum%20Struktur%20Data/28-09-2026/Screenshot/Output-Unguided-Three.png)
 
-Program ketiga membentuk pola angka cermin simetris terbalik menggunakan perulangan bersarang (nested loop) yang mengatur cetakan spasi untuk posisi rata tengah, deret angka menurun, karakter pembatas bintang * di posisi tengah, serta deret angka menaik di sisi kanan.
+Program ini membuat pola "cermin" dari angka yang diinputkan. Kalau input-nya 3, baris pertama berisi `321*123`, baris kedua `21*12`, baris ketiga `1*1`, dan baris terakhir hanya `*`, dengan posisi yang rata tengah seperti pada gambar soal.
+
+Cara kerjanya memakai perulangan `for` bersarang. Perulangan paling luar memakai variabel `i` yang dimulai dari `n` lalu turun sampai 0, dan setiap putarannya menghasilkan satu baris. Di dalam satu baris ada empat tahap. Pertama, perulangan `s` mencetak spasi sebanyak `n - i` supaya baris makin ke bawah makin menjorok ke kanan. Kedua, perulangan `j` yang menurun dari `i` sampai 1 mencetak sisi kiri (misalnya 3 2 1). Ketiga, program mencetak tanda `*` di tengah. Keempat, perulangan `j` yang naik dari 1 sampai `i` mencetak sisi kanan (1 2 3). Terakhir, `endl` dipakai untuk pindah baris. Pada baris terakhir ketika `i = 0`, kedua perulangan angka tidak berjalan sehingga hanya tanda `*` yang muncul.
 
 ## Kesimpulan
 Dari praktikum Modul 1 ini, saya belajar cara membuat program sederhana dalam bahasa C++, mulai dari struktur program, penggunaan variabel dengan tipe data yang sesuai, sampai input dan output memakai `cin` dan `cout`. Pada soal pertama, saya memakai tipe `float` dan operator aritmatika untuk menghitung dua bilangan. Pada soal kedua, saya memakai `if-else`, `switch`, serta operator `/` dan `%` untuk mengubah angka menjadi tulisan. Pada soal ketiga, saya memakai perulangan `for` bersarang untuk membentuk pola angka. Dengan latihan ini saya jadi lebih paham bahwa program yang rumit sebenarnya tersusun dari konsep dasar yang dipakai berulang, sehingga dasar-dasar ini penting dikuasai sebelum masuk ke materi struktur data.
